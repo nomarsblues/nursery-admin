@@ -35,6 +35,9 @@ public class EnrollRepoImpl implements EnrollRepo {
             if (!CollectionUtils.isEmpty(query.getIds())) {
                 predicates.add(root.get("id").in(query.getIds()));
             }
+            if (query.getUserId() != null) {
+                predicates.add(cb.equal(root.get("user_id").as(Long.class), query.getUserId()));
+            }
             return cb.and(predicates.toArray(new Predicate[predicates.size()]));
         };
         return RepositoryExecutor.query(repository::findAll, specification).stream().map(this::build).collect(Collectors.toList());

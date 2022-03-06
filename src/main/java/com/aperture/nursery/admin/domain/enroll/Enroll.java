@@ -2,6 +2,7 @@ package com.aperture.nursery.admin.domain.enroll;
 
 import com.aperture.nursery.admin.common.bean.BeanContextUtil;
 import com.aperture.nursery.admin.meta.Domain;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,6 +37,7 @@ public class Enroll implements Domain {
     @Setter
     @Builder
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class EnrollDetail {
         @Valid
         @NotNull(message = "学生信息缺失")
@@ -50,6 +52,7 @@ public class Enroll implements Domain {
         @Setter
         @Builder
         @NoArgsConstructor
+        @AllArgsConstructor
         public static class Parent {
             @Pattern(regexp = "^(\\d{18,18}|\\d{15,15}|(\\d{17,17}[x|X]))$", message = "身份证格式错误")
             private String id;
@@ -67,6 +70,7 @@ public class Enroll implements Domain {
         @Setter
         @Builder
         @NoArgsConstructor
+        @AllArgsConstructor
         public static class Student {
             @Pattern(regexp = "^(\\d{18,18}|\\d{15,15}|(\\d{17,17}[x|X]))$", message = "身份证格式错误")
             private String id;

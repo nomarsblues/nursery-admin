@@ -4,6 +4,7 @@ import com.aperture.nursery.admin.domain.enroll.Enroll;
 import com.aperture.nursery.admin.domain.enroll.EnrollCreator;
 import com.aperture.nursery.admin.domain.enroll.EnrollUpdater;
 import com.aperture.nursery.admin.domain.enroll.repo.EnrollRepo;
+import com.aperture.nursery.admin.domain.user.UserService;
 import com.aperture.nursery.admin.meta.exception.ServiceException;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class EnrollApp {
     private EnrollCreator enrollCreator;
     @Autowired
     private EnrollUpdater enrollUpdater;
+    @Autowired
+    private UserService userService;
 
     @Transactional
     public void create(Enroll cmd) {
@@ -40,6 +43,14 @@ public class EnrollApp {
 
     public List<Enroll> listAll() {
         return enrollRepo.query(EnrollRepo.Query.builder().build());
+    }
+
+    public List<Enroll> listAllForClient() {
+        Long userId = userService.getUserId();
+        if (userId == null) {
+            return Lists.newArrayList();
+        }
+        return enrollRepo.query(EnrollRepo.Query.builder().userId(userId).build());
     }
 
     public Enroll findById(Long id) {

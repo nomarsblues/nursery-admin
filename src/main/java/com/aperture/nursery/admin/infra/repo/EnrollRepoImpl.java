@@ -36,7 +36,7 @@ public class EnrollRepoImpl implements EnrollRepo {
                 predicates.add(root.get("id").in(query.getIds()));
             }
             if (query.getUserId() != null) {
-                predicates.add(cb.equal(root.get("user_id").as(Long.class), query.getUserId()));
+                predicates.add(cb.equal(root.get("userId").as(Long.class), query.getUserId()));
             }
             return cb.and(predicates.toArray(new Predicate[predicates.size()]));
         };

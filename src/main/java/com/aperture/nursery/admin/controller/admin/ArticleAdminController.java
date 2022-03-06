@@ -50,4 +50,9 @@ public class ArticleAdminController {
         app.offline(id);
         return HttpResponse.success();
     }
+
+    @GetMapping("detail")
+    public HttpResponse<Article> detail(@RequestParam Long id) {
+        return HttpResponse.success(app.findById(id));
+    }
 }

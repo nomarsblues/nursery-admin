@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ArticleApp {
@@ -52,10 +53,23 @@ public class ArticleApp {
     }
 
     public List<Article> listAllForClient() {
-        return articleRepo.query(ArticleRepo.Query.builder().status(0).build());
+        return articleRepo.query(ArticleRepo.Query.builder().status(0).build())
+                .stream().peek(a -> a.setContent(null)).collect(Collectors.toList());
     }
 
     public List<Article> listAll() {
         return articleRepo.query(ArticleRepo.Query.builder().build());
+    }
+
+    public Article findByIdForClient(Long id) {
+        Article article = articleRepo.findById(id);
+        if (article.getStatus() == 1) {
+            return null;
+        }
+        return article;
+    }
+
+    public Article findById(Long id) {
+        return articleRepo.findById(id);
     }
 }

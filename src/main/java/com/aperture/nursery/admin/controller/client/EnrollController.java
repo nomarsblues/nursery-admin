@@ -27,16 +27,16 @@ public class EnrollController {
     }
 
     @PostMapping("create")
-    public HttpResponse<Void> create(@Validated @RequestBody Enroll enroll, String wxId) {
+    public HttpResponse<Void> create(@Validated @RequestBody Enroll enroll) {
+        SessionContext.get().setWxId(enroll.getWxId());
         app.create(enroll);
-        SessionContext.get().setWxId(wxId);
         return HttpResponse.success();
     }
 
     @PostMapping("update")
-    public HttpResponse<Void> update(@Validated @RequestBody Enroll enroll, String wxId) {
+    public HttpResponse<Void> update(@Validated @RequestBody Enroll enroll) {
+        SessionContext.get().setWxId(enroll.getWxId());
         app.update(enroll);
-        SessionContext.get().setWxId(wxId);
         return HttpResponse.success();
     }
 }

@@ -4,6 +4,7 @@ import com.aperture.nursery.admin.common.bean.BeanContextUtil;
 import com.aperture.nursery.admin.meta.Domain;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.Valid;
@@ -18,12 +19,13 @@ import java.util.List;
 @Setter
 public class Enroll implements Domain {
     private Long id;
-    @NotNull
+    @NotNull(message = "参数错误")
     private Long annoId;
     private Long userId;
     @Valid
     @NotNull(message = "信息缺失")
     private EnrollDetail detail;
+    private String wxId;
 
     public void check() {
         EnrollChecker checker = BeanContextUtil.getBean(EnrollChecker.class);
@@ -33,6 +35,7 @@ public class Enroll implements Domain {
     @Getter
     @Setter
     @Builder
+    @NoArgsConstructor
     public static class EnrollDetail {
         @Valid
         @NotNull(message = "学生信息缺失")
@@ -46,6 +49,7 @@ public class Enroll implements Domain {
         @Getter
         @Setter
         @Builder
+        @NoArgsConstructor
         public static class Parent {
             @Pattern(regexp = "^(\\d{18,18}|\\d{15,15}|(\\d{17,17}[x|X]))$", message = "身份证格式错误")
             private String id;
@@ -62,6 +66,7 @@ public class Enroll implements Domain {
         @Getter
         @Setter
         @Builder
+        @NoArgsConstructor
         public static class Student {
             @Pattern(regexp = "^(\\d{18,18}|\\d{15,15}|(\\d{17,17}[x|X]))$", message = "身份证格式错误")
             private String id;

@@ -15,7 +15,7 @@ public class RepositoryExecutor {
             c.accept(t);
             return t;
         } catch (Exception e) {
-            log.error("{} save failed", JsonUtil.toJson(t), e);
+            log.error("save failed", e);
             throw new RepositoryException("保存数据失败");
         }
     }
@@ -24,7 +24,7 @@ public class RepositoryExecutor {
         try {
             return f.apply(t);
         } catch (Exception e) {
-            log.error("{} query failed", JsonUtil.toJson(t), e);
+            log.error("query failed", e);
             throw new RepositoryException("查询数据失败");
         }
     }
@@ -33,7 +33,7 @@ public class RepositoryExecutor {
         try {
             return f.apply(t).get();
         } catch (Exception e) {
-            log.error("{} findById failed", JsonUtil.toJson(t), e);
+            log.error("findById failed", e);
             throw new RepositoryException("查询数据失败");
         }
     }

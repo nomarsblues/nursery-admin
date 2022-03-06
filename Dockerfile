@@ -34,4 +34,4 @@ COPY --from=build /app/target/springboot-wxcloudrun-1.0.jar .
 EXPOSE 80
 
 # 执行启动命令
-CMD ["java", "-jar", "/app/springboot-wxcloudrun-1.0.jar"]
+CMD ["java", "-jar", "/app/springboot-wxcloudrun-1.0.jar --spring.profiles.active=pro"]

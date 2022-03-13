@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -16,6 +17,8 @@ public class Article implements Domain {
     private String image;
     private String content;
     private String description;
+    private Date createTime;
+    private Date updateTime;
 
     public void online() {
         status = 0;

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,7 +55,10 @@ public class ArticleApp {
 
     public List<Article> listAllForClient() {
         return articleRepo.query(ArticleRepo.Query.builder().status(0).build())
-                .stream().peek(a -> a.setContent(null)).collect(Collectors.toList());
+                .stream()
+                .peek(a -> a.setContent(null))
+                .sorted(Comparator.comparing(Article::getUpdateTime).reversed())
+                .collect(Collectors.toList());
     }
 
     public List<Article> listAll() {

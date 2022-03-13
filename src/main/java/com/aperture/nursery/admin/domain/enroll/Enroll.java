@@ -69,7 +69,7 @@ public class Enroll implements Domain {
         @NotNull(message = "未选择家庭情况")
         private Integer poor;
         @NotNull(message = "班级未选择")
-        private String studentClass;
+        private Long studentClass;
 
         @Getter
         @Setter

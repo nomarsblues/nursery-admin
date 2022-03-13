@@ -18,6 +18,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/api/admin/**")
 //                .authenticated()
                 .anyRequest()
-                .permitAll();
+                .permitAll()
+                .and()
+                .cors();
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,14 +41,14 @@ public class ArticleApp {
     }
 
     @Transactional
-    public void offline(Long id) {
+    public void offline(@NotNull Long id) {
         Article ori = articleRepo.findById(id);
         ori.offline();
         articleRepo.save(ori);
     }
 
     @Transactional
-    public void online(Long id) {
+    public void online(@NotNull Long id) {
         Article ori = articleRepo.findById(id);
         ori.online();
         articleRepo.save(ori);

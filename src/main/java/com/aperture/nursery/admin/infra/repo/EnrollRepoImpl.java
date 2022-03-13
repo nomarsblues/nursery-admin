@@ -38,6 +38,9 @@ public class EnrollRepoImpl implements EnrollRepo {
             if (query.getUserId() != null) {
                 predicates.add(cb.equal(root.get("userId").as(Long.class), query.getUserId()));
             }
+            if (query.getAnnoId() != null) {
+                predicates.add(cb.equal(root.get("annoId").as(Long.class), query.getAnnoId()));
+            }
             return cb.and(predicates.toArray(new Predicate[predicates.size()]));
         };
         return RepositoryExecutor.query(repository::findAll, specification).stream().map(this::build).collect(Collectors.toList());
@@ -54,6 +57,7 @@ public class EnrollRepoImpl implements EnrollRepo {
         entity.setAnnoId(domain.getAnnoId());
         entity.setUserId(domain.getUserId());
         entity.setLocation(domain.getDetail().getLocation());
+        entity.setPoor(domain.getDetail().getPoor());
         entity.setStduentId(domain.getDetail().getStudent().getId());
         entity.setStudentName(domain.getDetail().getStudent().getName());
         entity.setParentInfo(JsonUtil.toJson(domain.getDetail().getParents()));
@@ -67,6 +71,7 @@ public class EnrollRepoImpl implements EnrollRepo {
         domain.setAnnoId(entity.getAnnoId());
         Enroll.EnrollDetail detail = Enroll.EnrollDetail.builder()
                 .location(entity.getLocation())
+                .poor(entity.getPoor())
                 .student(Enroll.EnrollDetail.Student.builder()
                         .id(entity.getStduentId())
                         .name(entity.getStudentName())

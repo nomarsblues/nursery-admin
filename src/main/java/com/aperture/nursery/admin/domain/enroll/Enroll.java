@@ -2,6 +2,7 @@ package com.aperture.nursery.admin.domain.enroll;
 
 import com.aperture.nursery.admin.common.bean.BeanContextUtil;
 import com.aperture.nursery.admin.meta.Domain;
+import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -33,6 +35,23 @@ public class Enroll implements Domain {
         checker.check(this);
     }
 
+    public List<String> getTableContent() {
+        List<String> result = Lists.newArrayList();
+        result.add(getDetail().getStudent().getName());
+        result.add(getDetail().getStudent().getId());
+        result.add(getDetail().getLocation());
+        result.add(getDetail().getPoor() == 1 ? "是" : "否");
+        result.add( getDetail().getParents().stream()
+                .map(p -> String.format("关系: %s, 姓名: %s, 手机: %s,身份证: %s",
+                        p.getRelation().getName(),
+                        p.getName(),
+                        p.getPhone(),
+                        p.getId()))
+                .collect(Collectors.joining("; "))
+        );
+        return result;
+    }
+
     @Getter
     @Setter
     @Builder
@@ -47,6 +66,10 @@ public class Enroll implements Domain {
         private List<Parent> parents;
         @NotEmpty(message = "地址不能为空")
         private String location;
+        @NotNull(message = "未选择家庭情况")
+        private Integer poor;
+        @NotNull(message = "班级未选择")
+        private String studentClass;
 
         @Getter
         @Setter

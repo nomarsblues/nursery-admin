@@ -40,14 +40,14 @@ public class ArticleAdminController {
     }
 
     @PostMapping("online")
-    public HttpResponse<Void> online(@RequestParam Long id) {
-        app.online(id);
+    public HttpResponse<Void> online(@RequestBody Article article) {
+        app.online(article.getId());
         return HttpResponse.success();
     }
 
     @PostMapping("offline")
-    public HttpResponse<Void> offline(@RequestParam Long id) {
-        app.offline(id);
+    public HttpResponse<Void> offline(@RequestBody Article article) {
+        app.offline(article.getId());
         return HttpResponse.success();
     }
 

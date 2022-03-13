@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
 import java.util.Comparator;
 import java.util.List;
 
@@ -41,14 +42,14 @@ public class AnnounceApp {
     }
 
     @Transactional
-    public void offline(Long id) {
+    public void offline(@NotNull Long id) {
         Announce ori = announceRepo.findById(id);
         ori.offline();
         announceRepo.save(ori);
     }
 
     @Transactional
-    public void online(Long id) {
+    public void online(@NotNull Long id) {
         Announce ori = announceRepo.findById(id);
         ori.online();
         announceRepo.save(ori);

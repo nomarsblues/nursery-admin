@@ -15,5 +15,6 @@ public interface EnrollRepo extends Repo<Enroll, EnrollRepo.Query> {
     public static class Query {
         private List<Long> ids;
         private Long userId;
+        private Long annoId;
     }
 }

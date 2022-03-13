@@ -31,4 +31,7 @@ public class EnrollEntity extends BaseEntity {
 
     @Column(name = "location", length = 1024)
     private String location;
+
+    @Column(name = "poor")
+    private Integer poor;
 }
